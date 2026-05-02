@@ -2,6 +2,6 @@
   "name": "karmalab-tech",
   "private": true,
   "scripts": {
-    "start": "npx serve ."
+    "dev": "npx serve ."
   }
 }
