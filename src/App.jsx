@@ -44,7 +44,7 @@ function App() {
             className="font-light text-[clamp(36px,8vw,54px)] leading-[1.15] tracking-[-2px] text-[var(--kl-bone)] m-0"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
-            Going live
+            Going live<br />
             <span className="text-[var(--kl-pink)]">May 15</span>
           </h1>
         </div>
