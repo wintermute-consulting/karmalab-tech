@@ -1,13 +1,12 @@
 const KLEyebrow = ({ children, muted, style }) => (
-  <div style={{
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: 12,
-    letterSpacing: '0.14em',
-    textTransform: 'uppercase',
-    color: muted ? 'var(--kl-ash)' : 'var(--kl-pink)',
-    fontWeight: 500,
-    ...style,
-  }}>{children}</div>
+  <div
+    className="text-[12px] tracking-[0.14em] uppercase font-medium"
+    style={{
+      fontFamily: "'JetBrains Mono', monospace",
+      color: muted ? 'var(--kl-ash)' : 'var(--kl-pink)',
+      ...style,
+    }}
+  >{children}</div>
 );
 
 const KLButton = ({ children, variant = 'primary', size = 'md', onClick, accent = 'lime', style, ...rest }) => {
@@ -22,41 +21,27 @@ const KLButton = ({ children, variant = 'primary', size = 'md', onClick, accent 
   const a = accent === 'pink'
     ? { base: '#FB48C4', hot: '#FD7BD8', deep: '#C12E9A', glow: 'rgba(251, 72, 196,.5)' }
     : { base: '#85FF00', hot: '#AFFF56', deep: '#5BB300', glow: 'rgba(133,255,0,.5)' };
-  const base = {
+  const dynamicStyle = {
     fontFamily: "'Space Grotesk', sans-serif",
-    fontWeight: 500,
     fontSize: s.fs,
     padding: s.pad,
-    borderRadius: 999,
-    cursor: 'pointer',
-    border: '2px solid transparent',
     transition: 'all 180ms cubic-bezier(.22,1,.36,1)',
     transform: p ? 'scale(.98)' : 'scale(1)',
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: 8,
-    textDecoration: 'none',
-    letterSpacing: '-0.005em',
-    whiteSpace: 'nowrap',
-  };
-  const variants = {
-    primary: {
+    ...(variant === 'primary' ? {
       background: h ? a.hot : 'transparent',
       borderColor: h ? a.hot : a.base,
       color: p ? a.deep : (h ? '#000' : a.base),
       boxShadow: h ? `0 0 0 1px ${a.glow}, 0 0 28px ${a.glow}` : 'none',
-    },
-    ghost: {
+    } : variant === 'ghost' ? {
       background: 'transparent',
       color: h ? '#fff' : 'var(--kl-bone)',
       borderColor: 'rgba(255,255,255,.14)',
-    },
-    text: {
+    } : {
       background: 'transparent',
       color: h ? a.hot : a.base,
-      border: 'none',
       padding: `${s.pad.split(' ')[0]} 8px`,
-    },
+    }),
+    ...style,
   };
   return (
     <button
@@ -65,7 +50,8 @@ const KLButton = ({ children, variant = 'primary', size = 'md', onClick, accent 
       onMouseLeave={() => { setH(false); setP(false); }}
       onMouseDown={() => setP(true)}
       onMouseUp={() => setP(false)}
-      style={{ ...base, ...variants[variant], ...style }}
+      className="font-medium rounded-full cursor-pointer border-2 border-transparent inline-flex items-center gap-2 no-underline tracking-[-0.005em] whitespace-nowrap"
+      style={dynamicStyle}
       {...rest}
     >
       {children}
@@ -88,16 +74,12 @@ const KLIconButton = ({ children, onClick, accent = 'pink', size = 44, title, st
       onMouseLeave={() => { setH(false); setP(false); }}
       onMouseDown={() => setP(true)}
       onMouseUp={() => setP(false)}
+      className="rounded-full cursor-pointer inline-flex items-center justify-center"
       style={{
         width: size, height: size,
-        borderRadius: 999,
         background: h ? 'rgba(255,255,255,0.04)' : 'transparent',
         border: `2px solid ${h ? a.hot : a.base}`,
         color: h ? a.hot : a.base,
-        cursor: 'pointer',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         transition: 'all 180ms cubic-bezier(.22,1,.36,1)',
         transform: p ? 'scale(.94)' : 'scale(1)',
         boxShadow: h ? `0 0 24px ${a.glow}` : 'none',
@@ -112,33 +94,26 @@ const KLIconButton = ({ children, onClick, accent = 'pink', size = 44, title, st
 };
 
 const KLMeta = ({ children, color, style }) => (
-  <span style={{
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: 11,
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
-    color: color || 'var(--kl-ash)',
-    ...style,
-  }}>{children}</span>
+  <span
+    className="text-[11px] tracking-[0.12em] uppercase"
+    style={{ fontFamily: "'JetBrains Mono', monospace", color: color || 'var(--kl-ash)', ...style }}
+  >{children}</span>
 );
 
 const KLSectionNumber = ({ n, label, accent = 'pink' }) => (
-  <div style={{
-    display: 'flex', gap: 20, alignItems: 'baseline',
-    fontFamily: "'Space Grotesk', sans-serif",
-    fontSize: 'clamp(28px, 3vw, 44px)',
-    fontWeight: 300,
-    letterSpacing: '-0.025em',
-  }}>
-    <span style={{
-      fontFamily: "'JetBrains Mono', monospace",
-      fontSize: 'clamp(12px, 1.1vw, 16px)',
-      letterSpacing: '0.14em',
-      textTransform: 'uppercase',
-      color: accent === 'lime' ? 'var(--kl-lime)' : 'var(--kl-pink)',
-      alignSelf: 'center',
-    }}>§ {n}</span>
-    <span style={{ color: 'var(--kl-bone)' }}>{label}</span>
+  <div
+    className="flex gap-5 items-baseline font-light tracking-[-0.025em]"
+    style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 'clamp(28px, 3vw, 44px)' }}
+  >
+    <span
+      className="tracking-[0.14em] uppercase self-center"
+      style={{
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: 'clamp(12px, 1.1vw, 16px)',
+        color: accent === 'lime' ? 'var(--kl-lime)' : 'var(--kl-pink)',
+      }}
+    >§ {n}</span>
+    <span className="text-[var(--kl-bone)]">{label}</span>
   </div>
 );
 
