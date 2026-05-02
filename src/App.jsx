@@ -6,33 +6,6 @@ function App() {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
-      {/* Background video — faded + blurry */}
-      <video autoPlay loop muted playsInline
-        style={{
-          position: 'absolute', inset: 0,
-          width: '100%', height: '100%',
-          objectFit: 'cover',
-          opacity: 0.18,
-          filter: 'blur(14px) saturate(0.6)',
-        }}
-        src={REEL_SRC}
-      />
-      {/* Vignette */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.9) 100%)',
-        pointerEvents: 'none',
-      }} />
-      {/* Grain */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-          `<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(#n)' opacity='0.35'/></svg>`
-        )}")`,
-        mixBlendMode: 'overlay',
-        opacity: 0.22,
-        pointerEvents: 'none',
-      }} />
 
       {/* Contact us — top right */}
       <div style={{

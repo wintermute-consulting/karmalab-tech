@@ -2,13 +2,6 @@
 
 Static website for [karmalab.tech](https://karmalab.tech), hosted via GitHub Pages.
 
-## Structure
-
-```
-index.html   # main page
-style.css    # stylesheet
-```
-
 ## GitHub Pages setup
 
 1. Go to **Settings → Pages** in this repository.
