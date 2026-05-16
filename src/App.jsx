@@ -45,7 +45,7 @@ function App() {
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             Going live<br />
-            <span className="text-[var(--kl-pink)]">May 15</span>
+            <span className="text-[var(--kl-pink)]">real soon</span>
           </h1>
         </div>
       </div>
